@@ -88,3 +88,38 @@ public class TestEmployeeManagementSystem {
         } while (choice != 10);
     }
 }
+
+
+
+
+
+@Override
+    public void readFile(File fs) {
+
+        if (fs.exists()) {
+
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fs));) {
+                while (true) {
+                    Student s = (Student) ois.readObject();
+                    sarr.add(s);
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+    }
+
+    @Override
+    public void writeFile(File fs) {
+        if (fs.exists()) {
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fs));) {
+                for (Student student : sarr) {
+                    oos.writeObject(student);
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
